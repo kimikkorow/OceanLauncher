@@ -6,6 +6,7 @@ using OceanLauncher.Utils;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -31,6 +32,7 @@ namespace OceanLauncher
     {
         MainVM vm = new MainVM();
         SettingPage.CFG cfg;
+        CustomCFG CustomCFG;
         readonly string id = "core.home";
         public MainWindow()
         {
@@ -83,6 +85,18 @@ namespace OceanLauncher
 
         public async Task LoadDataAsync()
         {
+            try
+            {
+                CustomCFG=JsonConvert.DeserializeObject<CustomCFG>(File.ReadAllText("links.json"));
+
+            }
+            catch (Exception)
+            {
+
+            }
+
+
+
             try
             {
                 vm.ServerInfo = JsonConvert.DeserializeObject<ServerInfo>(SettingProvider.Get(id));
@@ -221,18 +235,33 @@ namespace OceanLauncher
 
         private void Button_Click_5(object sender, RoutedEventArgs e)
         {
+            if (CustomCFG!=null)
+            {
+                Process.Start(CustomCFG.logoUrl);
+                return;
+            }
             Process.Start("https://github.com/SwetyCore/OceanLauncher");
 
         }
 
         private void Button_Click_6(object sender, RoutedEventArgs e)
         {
+            if (CustomCFG != null)
+            {
+                Process.Start(CustomCFG.qqUrl);
+                return;
+            }
             Process.Start("https://github.com/SwetyCore/OceanLauncher");
 
         }
 
         private void Button_Click_7(object sender, RoutedEventArgs e)
         {
+            if (CustomCFG != null)
+            {
+                Process.Start(CustomCFG.githubUrl);
+                return;
+            }
             Process.Start("https://github.com/SwetyCore/OceanLauncher");
 
         }
@@ -261,8 +290,18 @@ namespace OceanLauncher
 
     }
 
+
+    public class CustomCFG
+    {
+        public string logoUrl { get; set; }
+        public string qqUrl { get; set; }
+        public string githubUrl { get; set; }
+    }
+
+
     public class LauncherCFG
     {
+
         
     }
 

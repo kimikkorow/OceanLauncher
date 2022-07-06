@@ -151,7 +151,7 @@ namespace OceanLauncher.Pages
                 throw;
             }
             string cn = Path.Combine(gpath, "YuanShen.exe");
-            string os = Path.Combine(gpath, "Genshin.exe");
+            string os = Path.Combine(gpath, "GenshinImpact.exe");
             if (File.Exists(cn))
             {
                 vm.Path = cn;

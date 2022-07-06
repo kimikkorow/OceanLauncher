@@ -10,14 +10,14 @@ namespace OceanLauncher.Utils
 {
     public static class GameRegReader
     {
-            /// <summary>
-            /// 获取游戏目录，是静态方法
-            /// </summary>
-            /// <returns></returns>
-            public static string GetGamePath()
-            {
-                string startpath = "";
-                string launcherpath = GetLauncherPath();
+        /// <summary>
+        /// 获取游戏目录，是静态方法
+        /// </summary>
+        /// <returns></returns>
+        public static string GetGamePath()
+        {
+            string startpath = "";
+            string launcherpath = GetLauncherPath();
                 #region 获取游戏启动路径，和官方配置一致
                 string cfgPath = Path.Combine(launcherpath, "config.ini");
                 if (File.Exists(launcherpath) || File.Exists(cfgPath))
@@ -51,7 +51,21 @@ namespace OceanLauncher.Utils
             {
                 RegistryKey key = Registry.LocalMachine;            //打开指定注册表根
                                                                     //获取官方启动器路径
-                string launcherpath = key.OpenSubKey(@"SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\原神").GetValue("InstallPath").ToString();
+            string launcherpath = "";
+            try
+            {
+
+                launcherpath = key.OpenSubKey(@"SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\Genshin Impact").GetValue("InstallPath").ToString();
+
+            }
+            catch (Exception)
+            {
+
+               launcherpath = key.OpenSubKey(@"SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\原神").GetValue("InstallPath").ToString();
+
+
+            }
+
                 byte[] bytepath = Encoding.UTF8.GetBytes(launcherpath);     //编码转换
                 string path = Encoding.UTF8.GetString(bytepath);
                 return path;
