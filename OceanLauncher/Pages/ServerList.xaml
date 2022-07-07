@@ -74,6 +74,9 @@
                                 <Border.InputBindings>
                                     <MouseBinding Command="{Binding DataContext.Delete, ElementName=root}" CommandParameter="{Binding }" MouseAction="LeftDoubleClick" />
                                 </Border.InputBindings>
+                                <Border.ToolTip>
+                                    <TextBlock Text="{Binding IP}"/>
+                                </Border.ToolTip>
                                 <!--<Border.ContextMenu>
                                     <ContextMenu>
                                         <MenuItem Command="{Binding ElementName=root,Path=DataContext.Delete}" 

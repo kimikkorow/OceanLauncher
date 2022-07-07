@@ -34,14 +34,14 @@
                     <RowDefinition/>
                 </Grid.RowDefinitions>
                 <Grid>
-                    <Border Padding="0 00">
+                    <Border Padding="0">
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition/>
                                 <ColumnDefinition Width="auto"/>
                             </Grid.ColumnDefinitions>
                             <StackPanel Orientation="Horizontal">
-                                <Border VerticalAlignment="Center" Width="60" Height="60">
+                                <Border VerticalAlignment="Center" Width="60" Height="50">
                                     <Border.Background>
                                         <ImageBrush ImageSource="Resources/logo.png"/>
                                     </Border.Background>
@@ -118,7 +118,7 @@
                     </StackPanel>
                     
                     <StackPanel Grid.Column="1" Grid.RowSpan="2">
-                        <Border  Grid.Column="1" Margin="10 0 30 0" VerticalAlignment="Top" CornerRadius="20" Background="#fdfdff" Padding="10 15">
+                        <Border Grid.Column="1" Margin="10 0 30 0" VerticalAlignment="Top" CornerRadius="20" Background="#fdfdff" Padding="10 15">
                             <StackPanel x:Name="stackPanel" Margin="10 0">
                                 <Grid >
 
@@ -172,7 +172,7 @@
                         </Border>
 
 
-                        <Border  Grid.Column="1" Margin="10 20 30 0" VerticalAlignment="Top" CornerRadius="20" Background="#fdfdff" Padding="10 15" Height="140">
+                        <Border  Grid.Column="1" Margin="10 20 30 0" VerticalAlignment="Top" CornerRadius="20" Background="#fdfdff" Padding="10 15" Height="170">
                             <StackPanel Margin="10 0">
                                 <Grid Height="30">
 
@@ -230,7 +230,7 @@
 
                     <Button Background="Transparent" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0 0 60 40" BorderThickness="0" Grid.Row="1" Grid.Column="1" Height="64" Width="180"
                             Style="{StaticResource ButtonStyle1}" Cursor="Hand" Padding="-2" Name="btn" Click="btn_Click">
-                        <Border CornerRadius="0"  Background="#677eff" 
+                        <Border CornerRadius="5"  Background="#677eff" 
                                 Width="{Binding ElementName=btn,Path=Width}"
                                 Height="{Binding ElementName=btn,Path=Height}" MouseRightButtonUp="Border_MouseRightButtonUp">
                             <Border.Effect>
