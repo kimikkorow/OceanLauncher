@@ -168,33 +168,8 @@ namespace OceanLauncher
 
         private void btn_Click(object sender, RoutedEventArgs e)
         {
-            var btn = sender as Button;
-            btn.IsEnabled = false;
-            if(GlobalProps.controller == null)
-            {
-                GlobalProps.controller = new GenshinImpact_Lanucher.Utils.ProxyController(cfg.Port, vm.ServerInfo.IP);
+            Border_MouseRightButtonUp(null, null);
 
-
-                GlobalProps.controller.Start();
-
-
-                GameHelper helper = new GameHelper();
-                helper.Start();
-
-                btnText.Text = "终止代理";
-                btnIcon.Text = "\xe71a";
-
-            }
-            else
-            {
-                GlobalProps.controller.Stop();
-                GlobalProps.controller = null;
-
-                btnText.Text = "加入游戏";
-                btnIcon.Text = "\xe768";
-
-            }
-            btn.IsEnabled = true;
 
 
         }
@@ -226,6 +201,7 @@ namespace OceanLauncher
             //}
         }
 
+        #region 链接按钮
 
         private void Button_Click_4(object sender, RoutedEventArgs e)
         {
@@ -263,6 +239,35 @@ namespace OceanLauncher
                 return;
             }
             Process.Start("https://github.com/SwetyCore/OceanLauncher");
+
+        }
+
+        #endregion
+
+        private void ProxyChecked(object sender, RoutedEventArgs e)
+        {
+            if (GlobalProps.controller == null)
+            {
+                GlobalProps.controller = new GenshinImpact_Lanucher.Utils.ProxyController(cfg.Port, vm.ServerInfo.IP);
+
+
+                GlobalProps.controller.Start();
+
+
+                //GameHelper helper = new GameHelper();
+                //helper.Start();
+
+
+            }
+        }
+
+        private void ProxyUnChecked(object sender, RoutedEventArgs e)
+        {
+            if (GlobalProps.controller!=null)
+            {
+                GlobalProps.controller.Stop();
+                GlobalProps.controller = null;
+            }
 
         }
     }

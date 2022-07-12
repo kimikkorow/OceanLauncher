@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Security.Principal;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -163,7 +164,207 @@ namespace OceanLauncher.Pages
             else
             {
                 MessageBox.Show("自动搜索失败，请手动指定 YuanShen.exe 所在位置！");
+                return;
             }
+
+
+            SettingProvider.Set(id, vm);
+
+
+        }
+
+        public bool IsAdministrator()
+
+        {
+
+            WindowsIdentity current = WindowsIdentity.GetCurrent();
+
+            WindowsPrincipal windowsPrincipal = new WindowsPrincipal(current);
+
+            return windowsPrincipal.IsInRole(WindowsBuiltInRole.Administrator);
+
+        }
+
+        const string METADATA_PATH = "patch-metadata";
+        const string FILE_NAME = "global-metadata.dat";
+
+
+        enum CilentType
+        {
+            cnrel,
+            osrel,
+            notsupported
+        }
+
+        private CilentType GetCilentType()
+        {
+            string file_path = Path.Combine(Path.GetDirectoryName(vm.Path), "YuanShen_Data", "Managed", "Metadata");
+
+            string file_path_osrel = Path.Combine(Path.GetDirectoryName(vm.Path), "GenshinImpact_Data", "Managed", "Metadata");
+
+            if (Directory.Exists(file_path_osrel))
+            {
+                return CilentType.osrel;
+            }
+            else if (Directory.Exists(file_path))
+            {
+                return CilentType.cnrel;
+            }
+            else
+            {
+                return CilentType.notsupported;
+            }
+
+        }
+
+
+        private void Patch(object sender, RoutedEventArgs e)
+        {
+
+            if (!IsAdministrator())
+            {
+                MessageBox.Show("未获取原神文件夹的读写权限，请以管理员身份运行启动器！");
+                return;
+            }
+
+            try
+            {
+                Path.GetDirectoryName(vm.Path);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("游戏路径不正确！"+ex.Message);
+                return
+                ;
+            }
+            string file_path = Path.Combine(Path.GetDirectoryName(vm.Path), "YuanShen_Data", "Managed", "Metadata");
+            string file_path_osrel = Path.Combine(Path.GetDirectoryName(vm.Path), "GenshinImpact_Data", "Managed", "Metadata");
+
+            if (GetCilentType() == CilentType.osrel)
+            {
+                file_path = file_path_osrel;
+            }
+            //备份
+            if (!File.Exists(Path.Combine(file_path, FILE_NAME + ".bak")))
+            {
+                File.Copy(
+                    Path.Combine(file_path, FILE_NAME),
+                    Path.Combine(file_path, FILE_NAME + ".bak"));
+            }
+
+            //修补
+            if (GetCilentType() == CilentType.cnrel)
+            {
+                
+
+                string patched_file = Path.Combine(METADATA_PATH, "cnrel-"+FILE_NAME);
+                if (File.Exists(patched_file))
+                {
+                    File.Copy(patched_file, Path.Combine(file_path, FILE_NAME), true
+                        );
+                }
+                else
+                {
+                    MessageBox.Show($"文件不存在！{patched_file}");
+                    return;
+                }
+            }
+            else if (GetCilentType() == CilentType.osrel)
+            {
+
+                string patched_file = Path.Combine(METADATA_PATH, "osrel-"+FILE_NAME);
+                if (File.Exists(patched_file))
+                {
+                    File.Copy(patched_file, Path.Combine(file_path_osrel, FILE_NAME), true
+                        );
+                }
+                else
+                {
+                    MessageBox.Show($"文件不存在！{patched_file}");
+                    return;
+                }
+            }
+            else
+            {
+                MessageBox.Show($"不支持的客户端类型！");
+                return;
+            }
+            MessageBox.Show($"成功Patch了客户端！");
+
+
+        }
+
+        private void UnPatch(object sender, RoutedEventArgs e)
+        {
+            if (!IsAdministrator())
+            {
+                MessageBox.Show("未获取原神文件夹的读写权限，请以管理员身份运行启动器！");
+                return;
+            }
+
+            try
+            {
+                Path.GetDirectoryName(vm.Path);
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("游戏路径不正确！" + ex.Message);
+                return
+                ;
+            }
+            string file_path = Path.Combine(Path.GetDirectoryName(vm.Path), "YuanShen_Data", "Managed", "Metadata");
+            string file_path_osrel = Path.Combine(Path.GetDirectoryName(vm.Path), "GenshinImpact_Data", "Managed", "Metadata");
+
+            if (GetCilentType() == CilentType.cnrel)
+            {
+
+                if (File.Exists(Path.Combine(file_path, FILE_NAME + ".bak")))
+                {
+                    File.Copy(
+                        Path.Combine(file_path, FILE_NAME + ".bak"),
+                        Path.Combine(file_path, FILE_NAME), true);
+                }
+                else
+                {
+                    MessageBox.Show("未找到备份文件！");
+                }
+            }
+            else if (GetCilentType() == CilentType.osrel)
+            {
+
+                if (File.Exists(Path.Combine(file_path_osrel, FILE_NAME + ".bak")))
+                {
+                    File.Copy(
+                        Path.Combine(file_path_osrel, FILE_NAME + ".bak"),
+                        Path.Combine(file_path_osrel, FILE_NAME), true);
+                }
+                else
+                {
+                    MessageBox.Show("未找到备份文件！");
+                }
+            }
+            else
+            {
+                MessageBox.Show($"不支持的客户端类型！");
+                return;
+            }
+
+            MessageBox.Show($"成功UnPatch了客户端！");
+
+        }
+
+        private void OpenFolder(object sender, RoutedEventArgs e)
+        {
+            if (!Directory.Exists(METADATA_PATH))
+            {
+                Directory.CreateDirectory(METADATA_PATH);
+            }
+
+            System.Diagnostics.Process.Start(Path.Combine(Environment.CurrentDirectory,METADATA_PATH));
+
+
+
         }
     }
 }

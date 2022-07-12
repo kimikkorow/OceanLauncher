@@ -15,6 +15,7 @@
                     <converters:TimeOut2Color x:Key="TimeOut2Color"/>
 
                 </ResourceDictionary>
+                <ResourceDictionary Source="CheckBoxStyle1.xaml"/>
             </ResourceDictionary.MergedDictionaries>
             <FontFamily x:Key="icon">/Fonts/#Segoe Fluent Icons</FontFamily>
         </ResourceDictionary>

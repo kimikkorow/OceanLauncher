@@ -172,7 +172,11 @@
                         </Border>
 
 
-                        <Border  Grid.Column="1" Margin="10 20 30 0" VerticalAlignment="Top" CornerRadius="20" Background="#fdfdff" Padding="10 15" Height="170">
+                        <Border  Visibility="Collapsed"
+                            Grid.Column="1" Margin="10 20 30 0" 
+                                 
+                                 VerticalAlignment="Top" CornerRadius="20" Background="#fdfdff" 
+                                 Padding="10 15" Height="170">
                             <StackPanel Margin="10 0">
                                 <Grid Height="30">
 
@@ -227,23 +231,32 @@
                         </StackPanel>
                     </Border>
 
+                    <Grid Grid.Row="1" Grid.Column="1">
+                        <StackPanel HorizontalAlignment="Left" VerticalAlignment="Center" Margin="40" Width="130">
+                            <CheckBox Checked="ProxyChecked" Unchecked="ProxyUnChecked" 
+                                      Style="{DynamicResource CheckBoxStyle1}">启用代理</CheckBox>
 
-                    <Button Background="Transparent" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0 0 60 40" BorderThickness="0" Grid.Row="1" Grid.Column="1" Height="64" Width="180"
+                        </StackPanel>
+
+                        <Button Background="Transparent" HorizontalAlignment="Right" 
+                                VerticalAlignment="Center" Margin="0 0 60 0" BorderThickness="0" 
+                                Grid.Row="1" Grid.Column="1" Height="64" Width="180"
                             Style="{StaticResource ButtonStyle1}" Cursor="Hand" Padding="-2" Name="btn" Click="btn_Click">
-                        <Border CornerRadius="5"  Background="#677eff" 
+                            <Border CornerRadius="5"  Background="#677eff" 
                                 Width="{Binding ElementName=btn,Path=Width}"
                                 Height="{Binding ElementName=btn,Path=Height}" MouseRightButtonUp="Border_MouseRightButtonUp">
-                            <Border.Effect>
-                                <DropShadowEffect ShadowDepth="0" Color="#677eff" Opacity="0.5" BlurRadius="74"/>
-                            </Border.Effect>
-                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                <Border.Effect>
+                                    <DropShadowEffect ShadowDepth="0" Color="#677eff" Opacity="0.5" BlurRadius="74"/>
+                                </Border.Effect>
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
 
-                                <TextBlock x:Name="btnIcon" Text="&#xe768;" FontSize="28" Margin="5" FontFamily="{StaticResource icon}" Foreground="White" VerticalAlignment="Center"/>
-                                <TextBlock x:Name="btnText" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="24" Text="加入游戏  "/>
-                            </StackPanel>
-                        </Border>
-                    </Button>
+                                    <TextBlock x:Name="btnIcon" Text="&#xe768;" FontSize="28" Margin="5" FontFamily="{StaticResource icon}" Foreground="White" VerticalAlignment="Center"/>
+                                    <TextBlock x:Name="btnText" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="24" Text="加入游戏  "/>
+                                </StackPanel>
+                            </Border>
+                        </Button>
 
+                    </Grid>
                 </Grid>
 
 
