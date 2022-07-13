@@ -171,34 +171,26 @@ namespace OceanLauncher
             Border_MouseRightButtonUp(null, null);
 
 
-
         }
 
         private void Border_MouseRightButtonUp(object sender, MouseButtonEventArgs e)
         {
-            //if (GlobalProps.controller == null)
-            //{
-            //GlobalProps.controller = new GenshinImpact_Lanucher.Utils.ProxyController(cfg.Port, vm.ServerInfo.IP);
+            var p = new Utils.PatchHelper().IsPatched();
+            MessageBoxResult vr = System.Windows.MessageBox.Show($"当前Patch状态：{p}，\n确定继续启动？", "启动前提示", MessageBoxButton.OKCancel, MessageBoxImage.Question);
+            if (vr == MessageBoxResult.OK) // 如果是确定，就执行下面代码，记得换上自己的代码喔
+            {
+
+                GameHelper helper = new GameHelper();
+                helper.Start();
+            }
+            else
+            {
+                frame.Navigate(new SettingPage());
+
+            }
 
 
-            //GlobalProps.controller.Start();
 
-
-            GameHelper helper = new GameHelper();
-            helper.Start();
-
-            //btnText.Text = "游戏已启动";
-            //btnIcon.Text = "\xe71a";
-            //}
-            //else
-            //{
-            //    GlobalProps.controller.Stop();
-            //    GlobalProps.controller = null;
-
-            //    btnText.Text = "加入游戏";
-            //    btnIcon.Text = "\xe768";
-
-            //}
         }
 
         #region 链接按钮

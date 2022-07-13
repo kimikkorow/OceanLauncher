@@ -134,6 +134,7 @@
     </Compile>
     <Compile Include="Utils\GameRegReader.cs" />
     <Compile Include="Utils\GameStart.cs" />
+    <Compile Include="Utils\PatchHelper.cs" />
     <Compile Include="Utils\ProxyController.cs" />
     <Compile Include="Utils\ServerInfoGetter.cs" />
     <Compile Include="Utils\SettingProvider.cs" />
