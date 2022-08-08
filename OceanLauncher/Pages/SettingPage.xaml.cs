@@ -147,9 +147,7 @@ namespace OceanLauncher.Pages
             catch (Exception)
             {
                 MessageBox.Show("自动搜索失败，请手动指定 YuanShen.exe 所在位置！");
-
-                return;
-                throw;
+                gpath = GameRegReader.ChoseLauncherPath();
             }
             string cn = Path.Combine(gpath, "YuanShen.exe");
             string os = Path.Combine(gpath, "GenshinImpact.exe");
@@ -163,11 +161,11 @@ namespace OceanLauncher.Pages
             }
             else
             {
-                MessageBox.Show("自动搜索失败，请手动指定 YuanShen.exe 所在位置！");
+                MessageBox.Show("未能找到游戏资源，建议确认路径是否正确");
                 return;
             }
 
-
+            MessageBox.Show("搜索成功！");
             SettingProvider.Set(id, vm);
 
 

@@ -58,19 +58,17 @@ namespace WpfWidgetDesktop.Utils
         }
         public static string Get(string id)
         {
-            try
-            {
-                if (GlobalSetting == null)
-                {
-                    return "";
-                }
-                return GlobalSetting[id].ToString();
-
-            }
-            catch
+            if (GlobalSetting == null)
             {
                 return "";
             }
+            else
+            {
+                return GlobalSetting[id].ToString();
+
+            }
+
+            
         }
 
     }

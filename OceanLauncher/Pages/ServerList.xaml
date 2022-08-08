@@ -53,9 +53,7 @@
                         </TextBlock>
                     </Button>
                 </Grid>
-                <TextBlock Grid.Row="1" VerticalAlignment="Bottom" FontSize="40" Foreground="Black" Margin="5 0">
-                    Server List
-                </TextBlock>
+                <TextBlock Grid.Row="1" VerticalAlignment="Bottom" FontSize="40" Foreground="Black" Margin="5 0"><Run Language="zh-cn" Text="服务器列表"/></TextBlock>
                 <ListView Grid.Row="2" Background="Transparent" BorderThickness="0" x:Name="lv" SelectionMode="Single" ItemsSource="{Binding ServerList}">
                     <ListView.Resources>
                         <Style TargetType="ListViewItem" BasedOn="{StaticResource ListViewItemStyle1}">
@@ -114,9 +112,7 @@
                     </ListView.ItemTemplate>
                 </ListView>
                 <Button Background="#677eff" BorderThickness="0" Grid.Row="3" x:Name="addBtn" Style="{DynamicResource ButtonStyle2}" 
-                        FontSize="22" Foreground="White" Click="addBtn_Click">
-                    + Add a Server
-                </Button>
+                        FontSize="22" Foreground="White" Click="addBtn_Click" Content="添加服务器地址"/>
             </Grid>
         </Border>
     </Grid>

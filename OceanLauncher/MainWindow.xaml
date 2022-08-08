@@ -55,7 +55,7 @@
                                     </TextBlock.Foreground>
 
                                 </TextBlock>
-                                <TextBlock Text="Launcher" FontSize="24" FontWeight="Bold" Foreground="Gray" VerticalAlignment="Center"/>
+                                <TextBlock FontSize="24" FontWeight="Bold" Foreground="Gray" VerticalAlignment="Center" Width="333" Text="Launcher"/>
                             </StackPanel>
                             <StackPanel Orientation="Horizontal" Grid.Column="1">
                                 <Button FontSize="18" Style="{DynamicResource ButtonStyle1}" Width="55" Padding="5 0" FontFamily="{StaticResource icon}" Foreground="Black"
