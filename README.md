@@ -1,7 +1,7 @@
 
 # OceanLauncher Server ver.
 ---------
-
+# 此启动器已废弃，请转到新项目：https://github.com/gc-toolkit/GenshinLauncher
 >  + **部分界面布局、功能 参考自大佬 [Coooookies](https://github.com/Coooookies)所制作的启动器**
 
 因为忍受不了electron的占用，就尝试用C#复刻了一下（
